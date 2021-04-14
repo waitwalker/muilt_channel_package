@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -74,7 +74,6 @@
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
-				CF3B75C9A7D2FA2A4C99F110 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +122,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				6A03430A2626912B0062A5D4 /* Build Number Auto Increase */,
 			);
 			buildRules = (
 			);
@@ -194,6 +194,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
 		};
+		6A03430A2626912B0062A5D4 /* Build Number Auto Increase */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number Auto Increase";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/sh\n# ************************************************\n#\n# ************************************************\n\n\n#\n# 每次编译后是否Build自动加1,\n# 可以修改该常量的值,以决定编译后还是打包后Build自动加1\n# #  0: 每次打包后Build自动加1  \n# #  1: 每次编译后Build自动加1  \nDEBUG_ENVIRONMENT_SYMBOL=0\n#\n#\n# 编译或打包环境的标志,默认为编译环境\nconfiguration_flag=\"Debug\"\n\n\nif [ $DEBUG_ENVIRONMENT_SYMBOL -eq 0 ]; then\n    configuration_flag=\"Release\"\nfi\n\n# 打印当前Xcode的环境配置\necho \"The current environment configuration for Xcode is: $CONFIGURATION\"\n\nif [ $configuration_flag == \"${CONFIGURATION}\" ]; then\n    echo \"The build version number needs to be increased.\"\n    \n    build_version=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleVersion\" \"${INFOPLIST_FILE}\")\n    # 判断读取出来的build_version变量是否为 $(CURRENT_PROJECT_VERSION) :\n    # 若是,则从 CURRENT_PROJECT_VERSION 读取Build版本号,然后+1;\n    # 若不是,则读取出来的build_version变量即为Build版本号,直接+1;\n    if [ $build_version == '$(CURRENT_PROJECT_VERSION)' ]; then\n        build_version=${CURRENT_PROJECT_VERSION}\n    fi\n\n    build_version=$(($build_version + 1))\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $build_version\" \"${INFOPLIST_FILE}\"\nelse\n    echo \"The build version number does not need to be increased.\"\nfi\n";
+		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,7 +224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -299,9 +317,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 4XP6U9X87N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.etiantian.online.muiltChannelPackage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -419,9 +441,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 4XP6U9X87N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.etiantian.online.muiltChannelPackage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -434,9 +460,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 4XP6U9X87N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.etiantian.online.muiltChannelPackage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";

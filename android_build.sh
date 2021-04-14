@@ -17,7 +17,7 @@ echo "---++++++===   打包完成   ===++++++---"
 
 # 后续操作可以继续操作
 # 获取当前时间
-currentTime=$(date +%s)
+currentTime=$(date +%y%m%d%H%M%S)
 echo "---++++++===   当前时间   ===++++++---"
 echo $currentTime
 apkName=$currentTime-release.apk
@@ -25,7 +25,7 @@ echo "---++++++===   apk名称   ===++++++---"
 echo $apkName
 
 # 移动&重命名apk
-mv build/app/outputs/flutter-apk/app-release.apk apks/$apkName
+mv build/app/outputs/flutter-apk/app-release.apk apps/$apkName
 i=1;
 while((i<60));
   do
@@ -40,8 +40,9 @@ while((i<60));
     fi
     i=$((i))+1;
 done
-cd apks
+cd apps
 echo "---++++++===   文件拷贝完成   ===++++++---"
+echo "---++++++===   目前目录中存在的文件   ===++++++---"
 ls
 
 
