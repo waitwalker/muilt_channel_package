@@ -16,8 +16,8 @@ echo "---++++++===   清空缓存完成   ===++++++---"
 echo "---++++++===   打包完成   ===++++++---"
 
 # 后续操作可以继续操作
-# 获取当前时间
-currentTime=$(date +%y%m%d%H%M%S)
+# 获取当前时间 精确到分钟
+currentTime=$(date +%y%m%d%H%M)
 echo "---++++++===   当前时间   ===++++++---"
 echo $currentTime
 apkName=$currentTime-release.apk

@@ -15,6 +15,11 @@ echo "---++++++===   JOB_NAME   ===++++++---"$JOB_NAME
 WORKSPACE=${WORKSPACE-.}
 echo "---++++++===   工作区WORKSPACE   ===++++++---"$WORKSPACE
 
+## 版本号
+APP_VERSION=$(cat ios/Runner.xcodeproj/project.pbxproj | grep MARKETING_VERSION | cut -d' ' -f3 | cut -d';' -f 1 | uniq)
+echo "版本号"
+echo $APP_VERSION
+
 BUILD_NUMBER=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' ios/Runner/Info.plist)
 echo "---++++++===   BUILD_NUMBER   ===++++++---"$BUILD_NUMBER
 
@@ -24,7 +29,7 @@ WORKSPACE_NAME=Runner
 BUILT_IPA_NAME=muilt_channel_package.ipa
 
 # 当前时间 精确到秒 210414115030
-export JENKINS_TIME=$(date +%y%m%d%H%M%S)
+export JENKINS_TIME=$(date +%y%m%d%H%M)
 
 # ipa 名称 由名字+时间拼接
 IPA_NAME=$APP_NAME-$JENKINS_TIME.ipa
